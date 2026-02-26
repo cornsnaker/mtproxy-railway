@@ -16,4 +16,4 @@ ENV PORT=443
 EXPOSE 443
 
 # Using the shell form of CMD allows Docker to read the $PORT and $SECRET environment variables
-CMD ["sh", "-c", "python3 mtprotoproxy.py -p $PORT -s $SECRET --user nobody --address 0.0.0.0"]
+CMD ["python3", "mtprotoproxy.py", "-p", "443", "-s", "1234567890abcdef1234567890abcdef", "--user", "nobody", "--address", "0.0.0.0"]
