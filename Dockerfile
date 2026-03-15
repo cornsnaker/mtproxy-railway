@@ -1,8 +1,8 @@
-# Use the official Telegram MTProxy image
 FROM telegrammessenger/proxy:latest
 
-# MTProxy uses 443 for traffic and 2398 for stats
+# Expose the necessary ports
 EXPOSE 443 2398
 
-# The entrypoint in the official image handles the SECRET and TAG 
-# environment variables automatically.
+# Railway sometimes requires the proxy to bind to 0.0.0.0 explicitly
+# We use the CMD to ensure the proxy knows its external identity
+CMD ["/bin/sh", "-c", "/usr/bin/mtproto-proxy -u root -p 2398 -H 443 -S $SECRET --nat-info $INTERNAL_IP:$EXTERNAL_IP --aes-pwd /etc/telegram/hello-exploit 0"]
